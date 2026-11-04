@@ -22,5 +22,6 @@ export const RemotionRoot: React.FC = () => (
       <Composition id="VerticalDados" component={VerticalDados} width={1080} height={1920} fps={FPS} durationInFrames={SEIS_SEGUNDOS} />
     </Folder>
 
+    {/* Seus vídeos entram aqui: um <Folder name="001-slug"> por projeto, com o código em src/videos/<slug>/. */}
   </>
 );
