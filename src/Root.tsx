@@ -6,6 +6,10 @@ import {TerminalTecnico} from './estilos/TerminalTecnico';
 import {VerticalDados} from './estilos/VerticalDados';
 import {VerticalLegendas} from './estilos/VerticalLegendas';
 import {VerticalPrint} from './estilos/VerticalPrint';
+import {ADv002} from './videos/adv002/ADv002';
+import * as ADV002 from './videos/adv002/ADv002';
+import {ADv002Quadrado} from './videos/adv002/ADv002Quadrado';
+import * as ADV002Q from './videos/adv002/ADv002Quadrado';
 
 const FPS = 30;
 const SEIS_SEGUNDOS = 6 * FPS;
@@ -23,5 +27,9 @@ export const RemotionRoot: React.FC = () => (
     </Folder>
 
     {/* Seus vídeos entram aqui: um <Folder name="001-slug"> por projeto, com o código em src/videos/<slug>/. */}
+    <Folder name="001-ADv002">
+      <Composition id="ADv002" component={ADv002} width={ADV002.W} height={ADV002.H} fps={ADV002.FPS} durationInFrames={ADV002.DURACAO} />
+      <Composition id="ADv002Quadrado" component={ADv002Quadrado} width={ADV002Q.W} height={ADV002Q.H} fps={ADV002Q.FPS} durationInFrames={ADV002Q.DURACAO} />
+    </Folder>
   </>
 );
