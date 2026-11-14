@@ -30,29 +30,36 @@ você grava e corta → salva o vídeo e os prints em projetos/
 
 ## Instalar
 
-O jeito mais fácil: abra uma sessão **Code** no Claude e cole:
+### 1. Antes: instale os programas você mesmo
+
+Numa máquina zerada, instale **antes** de chamar o Claude, nesta ordem: **Git**, **Node.js LTS**, **Python** (3.10 ou mais novo), **FFmpeg** e, se quiser, o **Claude Code no terminal**. Sem o Git o Claude nem consegue clonar, e instalar programas por ele esbarra em janelas de administrador e termos de licença.
+
+O passo a passo para Windows (com instalação no `D:` e para todos os usuários) e Mac está em **[guias/1-primeiros-passos.md](guias/1-primeiros-passos.md)**. Depois de instalar, **reinicie o Claude Desktop** para ele enxergar os programas novos.
+
+### 2. Depois: peça ao Claude
+
+Abra uma sessão **Code** no Claude, escolha a pasta onde quer o estúdio (fora do OneDrive/iCloud/Dropbox) e cole:
 
 ```text
-Instala o repositório https://github.com/mackswendhell/studio-de-edicao na pasta C:\dev (siga a seção "Instalação" do README).
+Clone https://github.com/LandryDSF/claude-edicao-videos nesta pasta. Antes, leia o README, que tem as instruções para montar a pasta.
 ```
 
-O Claude clona o repositório e instala tudo, incluindo as skills gratuitas **remotion-best-practices** e **watch**. No fim, abra uma sessão nova dentro da pasta `studio-de-edicao`.
-
-Pré-requisitos no computador: Node.js, Python 3.10+ e FFmpeg. Se faltar algum, o passo a passo para Windows e Mac está em **[guias/1-primeiros-passos.md](guias/1-primeiros-passos.md)**.
+O Claude clona o repositório e instala tudo, incluindo as skills gratuitas **remotion-best-practices** e **watch**. No fim, abra uma **sessão nova** dentro da pasta `claude-edicao-videos`.
 
 ### Instalação (instruções para o agente)
 
 Se você é um agente de IA instalando este repositório, faça exatamente isto:
 
-1. Clone: `git clone https://github.com/mackswendhell/studio-de-edicao.git` na pasta indicada (padrão: `C:\dev` no Windows, `~/dev` no Mac/Linux; evite pastas do OneDrive/iCloud).
+1. Clone: `git clone https://github.com/LandryDSF/claude-edicao-videos.git` na pasta indicada pela pessoa (sem indicação: a pasta da sessão; evite pastas do OneDrive/iCloud). Se `git` não existir, pare e oriente a pessoa a instalar os pré-requisitos pelo [guia](guias/1-primeiros-passos.md) e reiniciar o Claude Desktop.
 2. Entre na pasta e rode **`npm run instalar`**. Ele instala, nesta ordem:
    - dependências do Remotion (`npm install`);
    - transcrição local (`pip install faster-whisper`);
    - skill **remotion-best-practices** no projeto (`npx -y skills add remotion-dev/skills -s remotion-best-practices -a claude-code -y`);
    - skill **watch** (`claude plugin marketplace add bradautomates/claude-video` e `claude plugin install watch@claude-video`).
 3. Se o comando `claude` não existir (usuário só com o Claude Desktop), a watch é oferecida automaticamente ao abrir a pasta, porque está declarada em `.claude/settings.json`. Oriente a pessoa a aceitar, ou a instalar em **Personalizar → Plugins → Adicionar marketplace** com `https://github.com/bradautomates/claude-video`.
-4. Se `node`, `python` ou `ffmpeg` faltarem, instale-os com o gerenciador do sistema (`winget` no Windows, `brew` no Mac; comandos em [guias/1-primeiros-passos.md](guias/1-primeiros-passos.md)) e rode `npm run instalar` de novo.
-5. Termine dizendo à pessoa para **abrir uma sessão nova do Claude dentro da pasta `studio-de-edicao`**. Skills instaladas só aparecem numa sessão nova, e é lá que o diretor de vídeo ([CLAUDE.md](CLAUDE.md)) assume.
+4. Se `node`, `python` ou `ffmpeg` faltarem, oriente a pessoa a instalá-los pelo [guia](guias/1-primeiros-passos.md) (instaladores pedem administrador e aceite de licença; o `winget` pode travar sem aviso quando os servidores da Microsoft estão instáveis) e rode `npm run instalar` de novo. Se o Claude Desktop foi aberto antes da instalação, recarregue o PATH no comando: `$env:Path = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User')`.
+5. Confira o Remotion com `npm run compositions`: deve listar os estilos de exemplo. Se ele só baixar o "Chrome Headless Shell" e terminar sem listar nada (acontece no Node 26: a extração para no meio sem erro), extraia à mão `node_modules/.remotion/chrome-headless-shell/chrome-headless-shell-win64.zip` para `node_modules/.remotion/chrome-headless-shell/win64/` e grave a versão esperada (a `TESTED_VERSION` de `@remotion/renderer`, ex.: `144.0.7559.20`) sem quebra de linha no arquivo `node_modules/.remotion/chrome-headless-shell/VERSION`.
+6. Termine dizendo à pessoa para **abrir uma sessão nova do Claude dentro da pasta `claude-edicao-videos`**. Skills instaladas só aparecem numa sessão nova, e é lá que o diretor de vídeo ([CLAUDE.md](CLAUDE.md)) assume.
 
 Já clonou manualmente? Basta rodar `npm run instalar` dentro da pasta.
 
@@ -61,7 +68,7 @@ Já clonou manualmente? Basta rodar `npm run instalar` dentro da pasta.
 Depois de instalar:
 
 1. Coloque seu vídeo em `projetos/001. meu-video/video/` e os prints em `projetos/001. meu-video/prints/`.
-2. Abra a pasta `studio-de-edicao` no Claude (sessão **Code**).
+2. Abra a pasta `claude-edicao-videos` no Claude (sessão **Code**). Use uma sessão nova para cada vídeo: o andamento fica salvo nos arquivos do projeto, não no chat.
 3. Responda se quer o Nível 1 ou o Nível 2 e diga o que imagina. O diretor cuida do resto.
 
 > **Dica que mais faz diferença:** tire print de tudo o que você cita no vídeo (sites, notícias, telas, gráficos) e salve em `prints/`. Animação feita sobre print real fica muito melhor que recriação.
@@ -69,7 +76,7 @@ Depois de instalar:
 ## Estrutura
 
 ```text
-studio-de-edicao/
+claude-edicao-videos/
 ├─ CLAUDE.md      o diretor de vídeo
 ├─ guias/         os manuais, do zero ao avançado
 ├─ estilos/       galeria de estilos de referência (horizontais e verticais)

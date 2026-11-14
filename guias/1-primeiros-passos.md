@@ -27,23 +27,48 @@ Você pode usar o Claude de três jeitos. Todos funcionam com este repositório:
 
 ### Windows
 
-Abra o **PowerShell** e rode, um por vez:
+Instale tudo **antes** de pedir qualquer coisa ao Claude. O roteiro abaixo instala para **todos os usuários** e numa pasta do `D:` (útil quando o `C:` tem pouco espaço); se preferir o `C:`, é só manter as pastas padrão dos instaladores.
+
+1. **Git**: baixe em [git-scm.com/download/win](https://git-scm.com/download/win). Escolha a pasta (ex.: `D:\Programas\Git`). Nas telas seguintes, o padrão serve; só troque o editor de Vim para **Notepad** (ou VS Code, se tiver) e deixe o PATH em *"Git from the command line and also from 3rd-party software"*.
+2. **Node.js LTS**: baixe o `.msi` em [nodejs.org](https://nodejs.org). Escolha a pasta (ex.: `D:\Programas\nodejs`) e **desmarque "Automatically install the necessary tools"**: essa opção instala Chocolatey, outro Python e o Visual Studio Build Tools (~6 GB no `C:`), que o projeto não usa.
+3. **Python**: as versões antigas (3.12, 3.13) só recebem correções de segurança e já não têm instalador para Windows; use a 3.14. No **PowerShell como Administrador** (troque `3.14.10` pela versão mais recente da 3.14 em [python.org/ftp/python](https://www.python.org/ftp/python/)):
+
+   ```powershell
+   Invoke-WebRequest -UseBasicParsing "https://www.python.org/ftp/python/3.14.10/python-3.14.10-amd64.exe" -OutFile "$env:USERPROFILE\Downloads\python-instalador.exe"
+   Start-Process "$env:USERPROFILE\Downloads\python-instalador.exe" -ArgumentList '/passive','InstallAllUsers=1','TargetDir=D:\Programas\Python314','PrependPath=1','Include_test=0','Include_launcher=1' -Wait
+   ```
+
+4. **FFmpeg**, no **PowerShell como Administrador**:
+
+   ```powershell
+   Invoke-WebRequest -UseBasicParsing "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip" -OutFile "$env:USERPROFILE\Downloads\ffmpeg.zip"
+   Expand-Archive "$env:USERPROFILE\Downloads\ffmpeg.zip" -DestinationPath "D:\Programas" -Force; Get-ChildItem "D:\Programas\ffmpeg-*-essentials_build" | Rename-Item -NewName "ffmpeg"
+   [Environment]::SetEnvironmentVariable('Path', [Environment]::GetEnvironmentVariable('Path','Machine') + ';D:\Programas\ffmpeg\bin', 'Machine')
+   ```
+
+5. **Claude Code no terminal** (recomendado: com ele, o `npm run instalar` já instala a skill `watch`). Instalador oficial, só para o seu usuário:
+
+   ```powershell
+   irm https://claude.ai/install.ps1 | iex
+   ```
+
+   Se depois `claude` não for reconhecido, adicione a pasta dele ao PATH do usuário:
+
+   ```powershell
+   [Environment]::SetEnvironmentVariable('Path', [Environment]::GetEnvironmentVariable('Path','User') + ';' + "$env:USERPROFILE\.local\bin", 'User')
+   ```
+
+> **O `winget` travou?** Ele depende de servidores da Microsoft; quando estão instáveis, o comando fica parado sem mensagem nenhuma. Use os instaladores e downloads diretos acima. E se aparecer *"Acesso ao Registro solicitado não é permitido"*, o PowerShell não foi aberto como Administrador.
+
+Feche e abra o PowerShell de novo e confira (todos devem responder com a versão):
 
 ```powershell
-winget install --id OpenJS.NodeJS.LTS --exact
-winget install --id Python.Python.3.12 --exact
-winget install --id Gyan.FFmpeg --exact
-winget install --id yt-dlp.yt-dlp --exact
-winget install --id Git.Git --exact
+git --version; node --version; python --version; ffmpeg -version; claude --version
 ```
 
-Feche e abra o PowerShell de novo e confira:
+Se `python` abrir a mensagem da Microsoft Store, desligue os atalhos `python.exe` e `python3.exe` em **Configurações → Aplicativos → Configurações avançadas de aplicativos → Aliases de execução de aplicativo**.
 
-```powershell
-node --version
-python --version
-ffmpeg -version
-```
+Por último, **reinicie o Claude Desktop**: ele só enxerga programas novos depois de reaberto.
 
 ### macOS
 
@@ -57,22 +82,22 @@ brew install node python ffmpeg yt-dlp git
 
 ### Jeito fácil: peça ao Claude
 
-Abra uma sessão **Code** no Claude e cole:
+Abra uma sessão **Code** no Claude, escolha a pasta onde quer o estúdio (fora do OneDrive, iCloud ou Dropbox: a sincronização atrapalha o render) e cole:
 
 ```text
-Instala o repositório https://github.com/mackswendhell/studio-de-edicao na pasta C:\dev (siga a seção "Instalação" do README).
+Clone https://github.com/LandryDSF/claude-edicao-videos nesta pasta. Antes, leia o README, que tem as instruções para montar a pasta.
 ```
 
-Ele clona, instala as dependências e as duas skills gratuitas (**remotion-best-practices** e **watch**). Quando terminar, **abra uma sessão nova** do Claude dentro da pasta `studio-de-edicao`: skills novas só aparecem numa sessão nova.
+Ele clona, instala as dependências e as duas skills gratuitas (**remotion-best-practices** e **watch**). Quando terminar, **abra uma sessão nova** do Claude dentro da pasta `claude-edicao-videos`: skills novas só aparecem numa sessão nova.
 
 ### Jeito manual
 
-Escolha uma pasta **fora** do OneDrive, iCloud ou Dropbox (a sincronização atrapalha o render). Por exemplo, `C:\dev` no Windows ou `~/dev` no Mac.
+Escolha uma pasta **fora** do OneDrive, iCloud ou Dropbox. Por exemplo, `D:\Claude\Videos` no Windows ou `~/dev` no Mac.
 
 ```bash
-cd C:\dev
-git clone https://github.com/mackswendhell/studio-de-edicao.git
-cd studio-de-edicao
+cd D:\Claude\Videos
+git clone https://github.com/LandryDSF/claude-edicao-videos.git
+cd claude-edicao-videos
 npm run instalar
 ```
 
@@ -118,7 +143,7 @@ Siga a seção [Conectar a Higgsfield ao Claude](4-nivel-2-higgsfield.md#1-conec
 ## 7. Entendendo as pastas
 
 ```text
-studio-de-edicao/
+claude-edicao-videos/
 ├─ CLAUDE.md           o "diretor": instruções que o Claude lê ao abrir o projeto
 ├─ README.md           visão geral
 ├─ guias/              os manuais (você está aqui)
@@ -154,7 +179,7 @@ A pasta `projetos/` inteira fica fora do Git (`.gitignore`), com exceção do ex
 
 1. Crie a pasta `projetos/001. meu-video/video/` e coloque seu vídeo lá (MP4 ou MOV, já cortado).
 2. Crie `projetos/001. meu-video/prints/` e salve prints de tudo o que você cita no vídeo: sites, notícias, telas de ferramentas.
-3. Abra a pasta `studio-de-edicao` no Claude (Desktop → Code → escolher pasta; ou `claude` no terminal dentro dela).
+3. Abra a pasta `claude-edicao-videos` no Claude (Desktop → Code → escolher pasta; ou `claude` no terminal dentro dela).
 4. O Claude vai perguntar se você quer o **Nível 1** ou o **Nível 2**. Responda.
 5. Diga o que quer. Exemplo:
    ```text

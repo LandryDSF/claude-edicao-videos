@@ -140,7 +140,7 @@ Na prática, é o Claude quem roda esses comandos. Eles estão aqui para você s
 | `npm` não é reconhecido | Node.js não instalado | instale o Node.js LTS (veja os [primeiros passos](1-primeiros-passos.md)) |
 | Studio abre, mas o vídeo aparece preto | caminho do arquivo errado ou com acento digitado diferente | peça ao Claude para conferir o `staticFile` |
 | Render muito lento | vídeo longo ou efeitos pesados | normal na primeira vez; peça render por partes ou em qualidade de rascunho para revisar |
-| `EPERM` no Windows | antivírus ou OneDrive bloqueando arquivos | mantenha o projeto fora de pastas sincronizadas (ex.: `C:\dev\studio-de-edicao`) |
+| `EPERM` no Windows | antivírus ou OneDrive bloqueando arquivos | mantenha o projeto fora de pastas sincronizadas (ex.: `D:\Claude\Videos\claude-edicao-videos`) |
 | Texto cortado ou fora da tela | frase maior que o espaço | peça ajuste de tamanho ou quebra de linha |
 
 ## 9. Licença do Remotion
