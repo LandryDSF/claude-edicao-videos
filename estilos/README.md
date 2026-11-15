@@ -6,6 +6,16 @@ Na conversa, basta citar o nome do estilo em negrito.
 
 ---
 
+## Seus estilos
+
+Estilos criados e aprovados nos seus projetos. Cada um tem uma ficha com cores, ritmo, regras e código-modelo.
+
+| Estilo | Para quê | Ficha |
+|---|---|---|
+| **Chamada Azul** | Chamada/anúncio curto: fundo escuro, azul de destaque, CTA amarelo, vertical + quadrado | [chamada-azul.md](chamada-azul.md) |
+
+---
+
 ## Exemplos que rodam no seu computador
 
 Estes seis vêm com código em [src/estilos/](../src/estilos/). Abra `npm run studio` para vê-los em movimento. A silhueta cinza marca onde entra a **sua câmera**.
