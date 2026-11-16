@@ -61,3 +61,17 @@ Criativo curto de **chamada / anúncio** para Reels, Stories e Meta Ads. Fundo e
 - Sem câmera mini, porque cobriria o conteúdo. O que era mini vai para o painel.
 - Câmera cheia é uma janela do master, centrada no rosto.
 - Selos nas laterais da cabeça. Títulos na faixa de cima e na de baixo. Legenda embaixo.
+
+## Selos DP-300 / DP-800 (padrão aprovado no 001.ADv004)
+
+Aprovado em 2026-11-15 ("ficou ótima"). Código de referência: componente `Selo` e cenas `Certificacoes`/`Fecho` em [src/videos/adv004/ADv004.tsx](../src/videos/adv004/ADv004.tsx).
+
+- **Sem cartão branco:** o PNG transparente vai direto sobre a cena, com sombra `drop-shadow(0 12px 22px rgba(0,0,0,.55))`.
+- **Mesmo tamanho de verdade:** os arquivos têm margens transparentes diferentes. Recorte cada selo pela área visível medida no canal alfa (`Dp-300.png` x 18–510, y 9–516; `DP-800.png` x 8–508, y 17–507, em 525×525) e mostre os dois com a **mesma altura visível**.
+- **Entram juntos** (mesmo `t0`) ou, se em sequência, só com tempo para a mola assentar antes do fim da cena: um selo ainda animando parece menor.
+- **Brilho azul pulsando no fundo:** `drop-shadow(0 0 28·b px rgba(46,163,242,.9·b))`, com `b = 0,5 + 0,5·sen((t − t0)·π·1,4)`.
+- **Vertical:** no peito, y 1100, altura 270, centros em x 540 ± 150. Mesma geometria na cena das certificações e no fecho.
+
+## Logos de texto preto
+
+- Logos com texto preto e fundo transparente (ex.: SQL Server 2025) **não** vão em cartão branco: o usuário reprovou. Use título em texto na montagem.
