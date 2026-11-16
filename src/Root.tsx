@@ -18,6 +18,16 @@ import {ADv003} from './videos/adv003/ADv003';
 import * as ADV003 from './videos/adv003/ADv003';
 import {ADv003Quadrado} from './videos/adv003/ADv003Quadrado';
 import * as ADV003Q from './videos/adv003/ADv003Quadrado';
+import {ADv004} from './videos/adv004/ADv004';
+import * as ADV004 from './videos/adv004/ADv004';
+import {ADv004Quadrado} from './videos/adv004/ADv004Quadrado';
+import * as ADV004Q from './videos/adv004/ADv004Quadrado';
+import {ADv005} from './videos/adv005/ADv005';
+import * as ADV005 from './videos/adv005/ADv005';
+import {ADv005Quadrado} from './videos/adv005/ADv005Quadrado';
+import * as ADV005Q from './videos/adv005/ADv005Quadrado';
+import {Live147} from './videos/live147/Live147';
+import * as LIVE147 from './videos/live147/Live147';
 
 const FPS = 30;
 const SEIS_SEGUNDOS = 6 * FPS;
@@ -46,6 +56,17 @@ export const RemotionRoot: React.FC = () => (
     <Folder name="001-ADv003">
       <Composition id="ADv003" component={ADv003} width={ADV003.W} height={ADV003.H} fps={ADV003.FPS} durationInFrames={ADV003.DURACAO} />
       <Composition id="ADv003Quadrado" component={ADv003Quadrado} width={ADV003Q.W} height={ADV003Q.H} fps={ADV003Q.FPS} durationInFrames={ADV003Q.DURACAO} />
+    </Folder>
+    <Folder name="001-ADv004">
+      <Composition id="ADv004" component={ADv004} width={ADV004.W} height={ADV004.H} fps={ADV004.FPS} durationInFrames={ADV004.DURACAO} />
+      <Composition id="ADv004Quadrado" component={ADv004Quadrado} width={ADV004Q.W} height={ADV004Q.H} fps={ADV004Q.FPS} durationInFrames={ADV004Q.DURACAO} />
+    </Folder>
+    <Folder name="001-ADv005">
+      <Composition id="ADv005" component={ADv005} width={ADV005.W} height={ADV005.H} fps={ADV005.FPS} durationInFrames={ADV005.DURACAO} />
+      <Composition id="ADv005Quadrado" component={ADv005Quadrado} width={ADV005Q.W} height={ADV005Q.H} fps={ADV005Q.FPS} durationInFrames={ADV005Q.DURACAO} />
+    </Folder>
+    <Folder name="002-LIVE147">
+      <Composition id="Live147" component={Live147} width={LIVE147.W} height={LIVE147.H} fps={LIVE147.FPS} durationInFrames={LIVE147.DURACAO} />
     </Folder>
   </>
 );
