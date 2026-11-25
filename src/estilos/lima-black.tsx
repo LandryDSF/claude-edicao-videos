@@ -103,11 +103,14 @@ export const ChipInclinado: React.FC<{
 
 // ---------- Tela tipográfica (preta) ----------
 // Cobre a câmera; cada linha entra no tempo da fala. A fonte encolhe para caber na largura.
-export type LinhaTipo = {t: number; texto: string; cor?: 'lima' | 'branco'; tamanho?: number; espacado?: boolean};
+// margemAbaixo: espaço extra (px, antes da escala) quando a linha de baixo tem barra ou acento que sobe (ex.: "30/11").
+export type LinhaTipo = {t: number; texto: string; cor?: 'lima' | 'branco'; tamanho?: number; espacado?: boolean; margemAbaixo?: number};
 
-export const TelaTipografica: React.FC<{de: number; ate: number; linhas: LinhaTipo[]; largura: number; altura: number; escala?: number; centroY?: number}> = ({
-  de, ate, linhas, largura, altura, escala = 1, centroY = 0.45,
+// tema 'lima' = tela cheia de data: fundo lima, todo o texto em preto.
+export const TelaTipografica: React.FC<{de: number; ate: number; linhas: LinhaTipo[]; largura: number; altura: number; escala?: number; centroY?: number; tema?: 'preto' | 'lima'}> = ({
+  de, ate, linhas, largura, altura, escala = 1, centroY = 0.45, tema = 'preto',
 }) => {
+  const claro = tema === 'lima';
   const t = useT();
   const {fps} = useVideoConfig();
   const frame = useQuadro();
@@ -115,12 +118,18 @@ export const TelaTipografica: React.FC<{de: number; ate: number; linhas: LinhaTi
   const caber = (texto: string, tam: number, esp: boolean) =>
     Math.min(tam * escala, (largura - 120) / (texto.length * (esp ? 0.95 : 0.7)));
   return (
-    <AbsoluteFill style={{background: LIMA.fundo, fontFamily: FONTE_LIMA}}>
-      <AbsoluteFill style={{background: `radial-gradient(circle at 50% ${centroY * 100}%, rgba(207,253,58,.13), transparent 55%)`}} />
+    <AbsoluteFill style={{background: claro ? LIMA.lima : LIMA.fundo, fontFamily: FONTE_LIMA}}>
+      <AbsoluteFill
+        style={{
+          background: claro
+            ? `radial-gradient(circle at 50% ${centroY * 100}%, rgba(255,255,255,.35), transparent 60%)`
+            : `radial-gradient(circle at 50% ${centroY * 100}%, rgba(207,253,58,.13), transparent 55%)`,
+        }}
+      />
       <div
         style={{
           position: 'absolute', left: 0, right: 0, top: altura * centroY, transform: 'translateY(-50%)', display: 'flex',
-          flexDirection: 'column', alignItems: 'center', gap: 6,
+          flexDirection: 'column', alignItems: 'center', gap: 22 * escala, // folga para a barra e os acentos das fontes grandes
         }}
       >
         {linhas
@@ -133,10 +142,10 @@ export const TelaTipografica: React.FC<{de: number; ate: number; linhas: LinhaTi
               <div
                 key={l.texto + l.t}
                 style={{
-                  fontWeight: 900, fontSize: tam, lineHeight: 1.02, color: lima ? LIMA.lima : LIMA.branco, whiteSpace: 'nowrap',
+                  fontWeight: 900, fontSize: tam, lineHeight: 1.02, color: claro ? LIMA.sobreLima : lima ? LIMA.lima : LIMA.branco, whiteSpace: 'nowrap',
                   letterSpacing: l.espacado ? `${interpolate(s, [0, 1], [0.6, 0.25])}em` : -1,
-                  transform: `scale(${0.75 + 0.25 * s})`, opacity: Math.min(1, s * 1.6),
-                  textShadow: lima ? '0 0 40px rgba(207,253,58,.35)' : undefined,
+                  transform: `scale(${0.75 + 0.25 * s})`, opacity: Math.min(1, s * 1.6), marginBottom: (l.margemAbaixo ?? 0) * escala,
+                  textShadow: lima && !claro ? '0 0 40px rgba(207,253,58,.35)' : undefined,
                 }}
               >
                 {l.texto}
