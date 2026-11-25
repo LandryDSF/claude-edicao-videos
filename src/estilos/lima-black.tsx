@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, Easing, Img, Sequence, interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, Audio, Easing, Img, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {loadFont} from '@remotion/google-fonts/Poppins';
 
 // Peças do estilo Lima Black (ficha: estilos/lima-black.md).
@@ -331,5 +331,26 @@ export const LegendaKaraoke: React.FC<{blocos: BlocoLegenda[]; top: number; tama
         </span>
       ))}
     </div>
+  );
+};
+
+// ---------- Efeitos sonoros ----------
+// Biblioteca sintetizada em projetos/_audio/efeitos/ (sem licença, pico em -3 dB). A voz do master é intocável:
+// os efeitos são camadas por baixo dela. O whoosh começa em silêncio: dispare 0,2 s antes do corte.
+export type Som = 'whoosh' | 'pop' | 'check' | 'impacto' | 'riser' | 'swish';
+// Medido no 006.ENv007: com o dobro destes volumes os efeitos empatavam com a voz. Assim ficam ~6–8 dB abaixo da fala.
+export const VOLUME_SOM: Record<Som, number> = {whoosh: 0.18, pop: 0.12, check: 0.15, impacto: 0.22, riser: 0.15, swish: 0.2};
+const DURACAO_SOM: Record<Som, number> = {whoosh: 0.55, pop: 0.16, check: 0.32, impacto: 0.9, riser: 1.2, swish: 0.4};
+
+export const Efeitos: React.FC<{lista: {t: number; som: Som; volume?: number}[]}> = ({lista}) => {
+  const {fps} = useVideoConfig();
+  return (
+    <>
+      {lista.map(({t, som, volume}) => (
+        <Sequence key={`${som}-${t}`} from={Math.max(0, Math.round(t * fps))} durationInFrames={Math.ceil((DURACAO_SOM[som] + 0.05) * fps)}>
+          <Audio src={staticFile(`_audio/efeitos/${som}.wav`)} volume={volume ?? VOLUME_SOM[som]} />
+        </Sequence>
+      ))}
+    </>
   );
 };
