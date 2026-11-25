@@ -13,3 +13,8 @@ projetos/000. exemplo/**/*.mov
 .claude/skills/
 .claude/settings.local.json
 skills-lock.json
+referencias/**/*.mp4
+referencias/**/*.mov
+referencias/**/*.webm
+referencias/**/frames/
+referencias/**/transcricao/

@@ -33,6 +33,7 @@ Quando a pessoa não souber o que pedir, ofereça opções concretas, poucas por
 - **Entregável:** vídeo completo em MP4 (padrão) ou inserções separadas (overlays transparentes em MOV + telas cheias em MP4).
 - **Formato:** horizontal 16:9 (YouTube), vertical 9:16 (Reels, TikTok, Shorts), quadrado.
 - **Estilo:** mostre a [galeria](estilos/README.md) e cite 2–3 estilos que combinam com o assunto do vídeo. Lembre que ela pode trazer referências próprias em `prints/`.
+- **Modelo a partir de referência:** ela pode trazer um vídeo de que gostou (link ou arquivo); você extrai o padrão e cria um modelo novo em `estilos/`, conforme [guias/6-modelo-por-referencia.md](guias/6-modelo-por-referencia.md). Leia esse guia sempre que ela trouxer um vídeo de referência.
 - **Intensidade:** sutil (quase só câmera), equilibrada, dominante (muita coisa na tela).
 - **Recursos:** prints com zoom e marca-texto, tela dividida, câmera em card (vertical, 16:9, quadrado, mini ou meia tela, bordas arredondadas ou "colada" com borda branca e fita, variando ao longo do vídeo), legendas dinâmicas, contadores e gráficos, fluxos que se montam, tipografia grande, B-roll gerado (Nível 2).
 - **Trecho:** o vídeo inteiro, só a abertura, só um trecho.
@@ -66,8 +67,9 @@ Depois de assistir o vídeo, **proponha você mesmo** duas ou três direções (
 
 ```text
 CLAUDE.md                 este arquivo
-guias/                    1 primeiros passos · 2 nível 1 · 3 manual do Remotion · 4 nível 2 · 5 direção editorial
-estilos/                  galeria de estilos (README.md + imagens/)
+guias/                    1 primeiros passos · 2 nível 1 · 3 manual do Remotion · 4 nível 2 · 5 direção editorial · 6 modelo por referência
+estilos/                  galeria de estilos (README.md + imagens/) e fichas dos modelos (<nome>.md)
+referencias/<slug>/       vídeos de referência (fora do Git) · frames/ · analise.md
 projetos/<NNN. slug>/     video/ · prints/ · frames/ · transcricao/ · hf/ · plano.md · edit.jsx
 edicoes/<NNN. slug>/      somente entregáveis finais
 src/Root.tsx              registro das composições do Remotion

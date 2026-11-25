@@ -10,9 +10,12 @@ Na conversa, basta citar o nome do estilo em negrito.
 
 Estilos criados e aprovados nos seus projetos. Cada um tem uma ficha com cores, ritmo, regras e código-modelo.
 
+Para criar um novo a partir de um vídeo de que você gostou (um anúncio, um Reels), cole o link ou salve o vídeo em `referencias/<nome>/video/` e peça "cria um modelo a partir desta referência". O passo a passo está em [guias/6-modelo-por-referencia.md](../guias/6-modelo-por-referencia.md).
+
 | Estilo | Para quê | Ficha |
 |---|---|---|
 | **Chamada Azul** | Chamada/anúncio curto: fundo escuro, azul de destaque, CTA amarelo, vertical + quadrado | [chamada-azul.md](chamada-azul.md) |
+| **Lima Black** | Lançamento/oferta com data: câmera cheia, telas pretas de tipografia gigante, verde-lima, checklist, CTA por comentário | [lima-black.md](lima-black.md) |
 
 ---
 

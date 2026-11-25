@@ -27,6 +27,8 @@ import * as ADV005 from './videos/adv005/ADv005';
 import {ADv005Quadrado} from './videos/adv005/ADv005Quadrado';
 import * as ADV005Q from './videos/adv005/ADv005Quadrado';
 import {Live147} from './videos/live147/Live147';
+import {ENv006, ENv006Quadrado} from './videos/env006/ENv006';
+import * as ENV006 from './videos/env006/ENv006';
 import * as LIVE147 from './videos/live147/Live147';
 
 const FPS = 30;
@@ -67,6 +69,10 @@ export const RemotionRoot: React.FC = () => (
     </Folder>
     <Folder name="002-LIVE147">
       <Composition id="Live147" component={Live147} width={LIVE147.W} height={LIVE147.H} fps={LIVE147.FPS} durationInFrames={LIVE147.DURACAO} />
+    </Folder>
+    <Folder name="004-ENv006">
+      <Composition id="ENv006" component={ENv006} width={ENV006.W} height={ENV006.H} fps={ENV006.FPS} durationInFrames={ENV006.DURACAO} />
+      <Composition id="ENv006Quadrado" component={ENv006Quadrado} width={ENV006.WQ} height={ENV006.HQ} fps={ENV006.FPS} durationInFrames={ENV006.DURACAO} />
     </Folder>
   </>
 );
