@@ -30,6 +30,8 @@ import {Live147} from './videos/live147/Live147';
 import {ENv001, ENv001Quadrado} from './videos/env001/ENv001';
 import {ENv002, ENv002Quadrado} from './videos/env002/ENv002';
 import * as ENV002 from './videos/env002/ENv002';
+import {ENv003, ENv003Quadrado} from './videos/env003/ENv003';
+import * as ENV003 from './videos/env003/ENv003';
 import * as ENV001 from './videos/env001/ENv001';
 import {ENv005, ENv005Quadrado} from './videos/env005/ENv005';
 import {ENv007, ENv007Quadrado} from './videos/env007/ENv007';
@@ -93,6 +95,10 @@ export const RemotionRoot: React.FC = () => (
     <Folder name="005-ENv002">
       <Composition id="ENv002" component={ENv002} width={ENV002.W} height={ENV002.H} fps={ENV002.FPS} durationInFrames={ENV002.DURACAO} />
       <Composition id="ENv002Quadrado" component={ENv002Quadrado} width={ENV002.WQ} height={ENV002.HQ} fps={ENV002.FPS} durationInFrames={ENV002.DURACAO} />
+    </Folder>
+    <Folder name="005-ENv003">
+      <Composition id="ENv003" component={ENv003} width={ENV003.W} height={ENV003.H} fps={ENV003.FPS} durationInFrames={ENV003.DURACAO} />
+      <Composition id="ENv003Quadrado" component={ENv003Quadrado} width={ENV003.WQ} height={ENV003.HQ} fps={ENV003.FPS} durationInFrames={ENV003.DURACAO} />
     </Folder>
     <Folder name="006-ENv007">
       <Composition id="ENv007" component={ENv007} width={ENV007.W} height={ENV007.H} fps={ENV007.FPS} durationInFrames={ENV007.DURACAO} />
